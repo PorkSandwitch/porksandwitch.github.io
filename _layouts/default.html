@@ -10,42 +10,429 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ site.name }} - {{ site.description }}"
+      href="{{ site.baseurl }}/feed.xml"
+    />
 
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <!-- Created with Jekyll Now -->
   </head>
 
   <body>
+
+    <!-- =========================================
+         HEADER
+         ========================================= -->
+
     <div class="wrapper-masthead">
+
       <div class="container">
+
         <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+
+          <a
+            href="{{ site.baseurl }}/"
+            class="site-avatar"
+          >
+            <img src="{{ site.avatar }}" alt="{{ site.name }}" />
+          </a>
+
 
           <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+
+            <h1 class="site-name">
+              <a href="{{ site.baseurl }}/">
+                {{ site.name }}
+              </a>
+            </h1>
+
+            <p class="site-description">
+              {{ site.description }}
+            </p>
+
           </div>
 
+
           <nav>
-            <a href="{{ site.baseurl }}/">Blog</a>
-            <a href="{{ site.baseurl }}/about">About</a>
+
+            <a href="{{ site.baseurl }}/">
+              Blog
+            </a>
+
+            <a href="{{ site.baseurl }}/about">
+              About
+            </a>
+
           </nav>
+
         </header>
+
       </div>
+
     </div>
 
-    <div id="main" role="main" class="container">
+
+    <!-- =========================================
+         MAIN CONTENT
+         ========================================= -->
+
+    <div
+      id="main"
+      role="main"
+      class="container"
+    >
       {{ content }}
     </div>
 
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
     <div class="wrapper-footer">
+
       <div class="container">
+
         <footer class="footer">
+
           {% include svg-icons.html %}
+
         </footer>
+
       </div>
+
     </div>
 
+
     {% include analytics.html %}
+
+
+    <!-- =========================================
+         PIRATE FLAG INTRO
+         ========================================= -->
+
+    <div
+      id="pirate-rain"
+      aria-hidden="true"
+    ></div>
+
+
+    <style>
+
+      #pirate-rain {
+
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+
+        overflow: hidden;
+
+        z-index: 99999;
+
+      }
+
+
+      .pirate-flag {
+
+        position: absolute;
+
+        top: -80px;
+
+        display: block;
+
+        font-size: 30px;
+
+        line-height: 1;
+
+        opacity: 0;
+
+        user-select: none;
+
+        will-change: transform, opacity;
+
+        animation:
+          pirateFall
+          var(--fall-time)
+          linear
+          var(--delay)
+          forwards;
+
+      }
+
+
+      @keyframes pirateFall {
+
+        0% {
+
+          transform:
+            translate3d(0, -80px, 0)
+            rotate(0deg);
+
+          opacity: 0;
+
+        }
+
+
+        10% {
+
+          opacity: 1;
+
+        }
+
+
+        50% {
+
+          transform:
+            translate3d(
+              var(--sway),
+              50vh,
+              0
+            )
+            rotate(var(--rotation));
+
+        }
+
+
+        85% {
+
+          opacity: 0.9;
+
+        }
+
+
+        100% {
+
+          transform:
+            translate3d(
+              var(--sway-end),
+              110vh,
+              0
+            )
+            rotate(
+              calc(var(--rotation) * 2)
+            );
+
+          opacity: 0;
+
+        }
+
+      }
+
+    </style>
+
+
+    <script>
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+          /*
+             Only run the pirate intro
+             on the homepage.
+          */
+
+          const path =
+            window.location.pathname;
+
+          const homePath =
+            "{{ site.baseurl }}/";
+
+
+          const isHome =
+            path === "/" ||
+            path === homePath ||
+            path === homePath.replace(/\/$/, "");
+
+
+          if (!isHome) {
+            return;
+          }
+
+
+          const container =
+            document.getElementById(
+              "pirate-rain"
+            );
+
+
+          if (!container) {
+            return;
+          }
+
+
+          /*
+             Number of flags.
+          */
+
+          const flagCount = 30;
+
+
+          /*
+             Create pirate flags.
+          */
+
+          for (
+            let i = 0;
+            i < flagCount;
+            i++
+          ) {
+
+            const flag =
+              document.createElement("span");
+
+
+            flag.className =
+              "pirate-flag";
+
+
+            flag.textContent =
+              "🏴‍☠️";
+
+
+            /*
+               Random horizontal position.
+            */
+
+            flag.style.left =
+              Math.random() * 100 + "vw";
+
+
+            /*
+               Random size.
+            */
+
+            const size =
+              22 +
+              Math.random() * 22;
+
+            flag.style.fontSize =
+              size + "px";
+
+
+            /*
+               Random fall duration.
+            */
+
+            const fallTime =
+              2.8 +
+              Math.random() * 2.5;
+
+            flag.style.setProperty(
+              "--fall-time",
+              fallTime + "s"
+            );
+
+
+            /*
+               Random delay.
+            */
+
+            const delay =
+              Math.random() * 1.8;
+
+            flag.style.setProperty(
+              "--delay",
+              delay + "s"
+            );
+
+
+            /*
+               Random sideways movement.
+            */
+
+            const sway =
+              (Math.random() - 0.5) *
+              180;
+
+            const swayEnd =
+              (Math.random() - 0.5) *
+              280;
+
+
+            flag.style.setProperty(
+              "--sway",
+              sway + "px"
+            );
+
+
+            flag.style.setProperty(
+              "--sway-end",
+              swayEnd + "px"
+            );
+
+
+            /*
+               Random rotation.
+            */
+
+            const rotation =
+              (Math.random() - 0.5) *
+              90;
+
+            flag.style.setProperty(
+              "--rotation",
+              rotation + "deg"
+            );
+
+
+            container.appendChild(flag);
+
+
+            /*
+               Remove each flag after
+               its animation finishes.
+            */
+
+            setTimeout(
+              function () {
+
+                flag.remove();
+
+              },
+              (
+                fallTime +
+                delay +
+                0.5
+              ) * 1000
+            );
+
+          }
+
+
+          /*
+             Remove the whole container
+             after the intro.
+          */
+
+          setTimeout(
+            function () {
+
+              const rain =
+                document.getElementById(
+                  "pirate-rain"
+                );
+
+              if (rain) {
+                rain.remove();
+              }
+
+            },
+            6500
+          );
+
+        }
+
+      );
+
+    </script>
+
   </body>
 </html>
