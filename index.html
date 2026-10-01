@@ -2,10 +2,14 @@
 layout: default
 ---
 
+<!-- =========================================
+     HERO
+     ========================================= -->
+
 <section class="hero">
 
   <div class="hero-badge">
-    ✦ Welcome to my corner of the internet
+    ✦ My corner of the internet
   </div>
 
   <h1>
@@ -13,11 +17,12 @@ layout: default
   </h1>
 
   <p class="hero-text">
-    I post things I find interesting, experiment with technology,
-    and document the stuff I learn along the way.
+    Cool stuff I find on the internet, useful tools, technology,
+    downloads, interesting discoveries, and whatever I feel like sharing.
   </p>
 
   <div class="hero-buttons">
+
     <a href="#posts" class="button primary-button">
       Explore my posts →
     </a>
@@ -25,46 +30,94 @@ layout: default
     <a href="{{ site.baseurl }}/about" class="button secondary-button">
       About me
     </a>
+
   </div>
 
 </section>
 
+
+<!-- =========================================
+     INTERESTS
+     ========================================= -->
 
 <section class="interests">
 
   <div class="section-heading">
-    <span class="section-label">INTERESTS</span>
-    <h2>Things I enjoy</h2>
-    <p>A few things you'll probably find around here.</p>
+
+    <span class="section-label">
+      INTERESTS
+    </span>
+
+    <h2>
+      Things I enjoy
+    </h2>
+
+    <p>
+      A few things you'll probably find around here.
+    </p>
+
   </div>
+
 
   <div class="interest-grid">
 
-    <div class="interest-card">
-      <div class="interest-icon">💻</div>
-      <h3>Technology</h3>
-      <p>
-        Computers, software, hardware and interesting things
-        I discover while messing around with them.
-      </p>
-    </div>
+    <!-- Technology -->
 
     <div class="interest-card">
-      <div class="interest-icon">🛠️</div>
-      <h3>Projects</h3>
+
+      <div class="interest-icon">
+        💻
+      </div>
+
+      <h3>
+        Technology
+      </h3>
+
       <p>
-        Experiments, projects and random ideas that I decide
-        are worth building.
+        Computers, software, hardware, tools and interesting
+        technology I discover while exploring the internet.
       </p>
+
     </div>
 
+
+    <!-- Discoveries -->
+
     <div class="interest-card">
-      <div class="interest-icon">✍️</div>
-      <h3>Writing</h3>
+
+      <div class="interest-icon">
+        🔎
+      </div>
+
+      <h3>
+        Discoveries
+      </h3>
+
       <p>
-        Notes, discoveries and things I've learned along
-        the way.
+        Cool websites, useful resources, interesting projects
+        and random things that are worth sharing.
       </p>
+
+    </div>
+
+
+    <!-- Thoughts -->
+
+    <div class="interest-card">
+
+      <div class="interest-icon">
+        💭
+      </div>
+
+      <h3>
+        Thoughts
+      </h3>
+
+      <p>
+        Random ideas, opinions, observations and anything else
+        I feel like writing about.
+      </p>
+
     </div>
 
   </div>
@@ -72,13 +125,29 @@ layout: default
 </section>
 
 
+<!-- =========================================
+     POSTS
+     ========================================= -->
+
 <section class="posts-section" id="posts">
 
   <div class="section-heading posts-heading">
-    <span class="section-label">LATEST</span>
-    <h2>Latest posts</h2>
-    <p>Things I've recently written about.</p>
+
+    <span class="section-label">
+      FROM MY CORNER
+    </span>
+
+    <h2>
+      Things I've found
+    </h2>
+
+    <p>
+      Cool stuff, useful tools, interesting websites and
+      random things worth sharing.
+    </p>
+
   </div>
+
 
   <div class="posts">
 
@@ -86,31 +155,69 @@ layout: default
 
       <article class="post">
 
+        <!-- Post information -->
+
         <div class="post-top">
-          <span class="post-number">
-            {{ forloop.index | prepend: '0' }}
+
+          <span class="post-category">
+
+            {% if post.categories %}
+
+              {{ post.categories | first }}
+
+            {% else %}
+
+              discovery
+
+            {% endif %}
+
           </span>
+
 
           <span class="post-date">
+
             {{ post.date | date: "%b %d, %Y" }}
+
           </span>
+
         </div>
+
+
+        <!-- Post title -->
 
         <h3>
+
           <a href="{{ site.baseurl }}{{ post.url }}">
+
             {{ post.title }}
+
           </a>
+
         </h3>
 
+
+        <!-- Post preview -->
+
         <div class="entry">
+
           {{ post.excerpt }}
+
         </div>
+
+
+        <!-- Read more -->
 
         <a
           href="{{ site.baseurl }}{{ post.url }}"
           class="read-more"
         >
-          Read article <span>→</span>
+
+          Read article
+
+          <span>
+            →
+          </span>
+
         </a>
 
       </article>
@@ -122,25 +229,38 @@ layout: default
 </section>
 
 
+<!-- =========================================
+     CLOSING SECTION
+     ========================================= -->
+
 <section class="closing-section">
 
   <div class="closing-card">
 
     <div class="closing-glow"></div>
 
-    <span class="section-label">KEEP EXPLORING</span>
+
+    <span class="section-label">
+      KEEP EXPLORING
+    </span>
+
 
     <h2>
       There's always something<br>
       interesting to discover.
     </h2>
 
+
     <p>
       Thanks for stopping by. Have a look around and
-      see what I've been working on.
+      see what I've been sharing.
     </p>
 
-    <a href="{{ site.baseurl }}/about" class="button primary-button">
+
+    <a
+      href="{{ site.baseurl }}/about"
+      class="button primary-button"
+    >
       More about me →
     </a>
 
