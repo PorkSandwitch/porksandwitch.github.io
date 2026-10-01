@@ -1,0 +1,149 @@
+---
+layout: default
+---
+
+<section class="hero">
+
+  <div class="hero-badge">
+    ✦ Welcome to my corner of the internet
+  </div>
+
+  <h1>
+    Hey, I'm <span>PorkSandwitch</span> 👋
+  </h1>
+
+  <p class="hero-text">
+    I post things I find interesting, experiment with technology,
+    and document the stuff I learn along the way.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="#posts" class="button primary-button">
+      Explore my posts →
+    </a>
+
+    <a href="{{ site.baseurl }}/about" class="button secondary-button">
+      About me
+    </a>
+  </div>
+
+</section>
+
+
+<section class="interests">
+
+  <div class="section-heading">
+    <span class="section-label">INTERESTS</span>
+    <h2>Things I enjoy</h2>
+    <p>A few things you'll probably find around here.</p>
+  </div>
+
+  <div class="interest-grid">
+
+    <div class="interest-card">
+      <div class="interest-icon">💻</div>
+      <h3>Technology</h3>
+      <p>
+        Computers, software, hardware and interesting things
+        I discover while messing around with them.
+      </p>
+    </div>
+
+    <div class="interest-card">
+      <div class="interest-icon">🛠️</div>
+      <h3>Projects</h3>
+      <p>
+        Experiments, projects and random ideas that I decide
+        are worth building.
+      </p>
+    </div>
+
+    <div class="interest-card">
+      <div class="interest-icon">✍️</div>
+      <h3>Writing</h3>
+      <p>
+        Notes, discoveries and things I've learned along
+        the way.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="posts-section" id="posts">
+
+  <div class="section-heading posts-heading">
+    <span class="section-label">LATEST</span>
+    <h2>Latest posts</h2>
+    <p>Things I've recently written about.</p>
+  </div>
+
+  <div class="posts">
+
+    {% for post in site.posts %}
+
+      <article class="post">
+
+        <div class="post-top">
+          <span class="post-number">
+            {{ forloop.index | prepend: '0' }}
+          </span>
+
+          <span class="post-date">
+            {{ post.date | date: "%b %d, %Y" }}
+          </span>
+        </div>
+
+        <h3>
+          <a href="{{ site.baseurl }}{{ post.url }}">
+            {{ post.title }}
+          </a>
+        </h3>
+
+        <div class="entry">
+          {{ post.excerpt }}
+        </div>
+
+        <a
+          href="{{ site.baseurl }}{{ post.url }}"
+          class="read-more"
+        >
+          Read article <span>→</span>
+        </a>
+
+      </article>
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+
+<section class="closing-section">
+
+  <div class="closing-card">
+
+    <div class="closing-glow"></div>
+
+    <span class="section-label">KEEP EXPLORING</span>
+
+    <h2>
+      There's always something<br>
+      interesting to discover.
+    </h2>
+
+    <p>
+      Thanks for stopping by. Have a look around and
+      see what I've been working on.
+    </p>
+
+    <a href="{{ site.baseurl }}/about" class="button primary-button">
+      More about me →
+    </a>
+
+  </div>
+
+</section>
