@@ -2,16 +2,114 @@
 layout: default
 ---
 
-<article class="post">
-  <h1>{{ page.title }}</h1>
+<article class="modern-post">
 
-  <div class="entry">
+  <!-- =========================================
+       POST HEADER
+       ========================================= -->
+
+  <header class="post-header">
+
+    <div class="post-meta">
+
+      <span class="post-category">
+
+        {% if page.categories %}
+
+          {{ page.categories | first }}
+
+        {% else %}
+
+          discovery
+
+        {% endif %}
+
+      </span>
+
+
+      <span class="post-date">
+
+        {{ page.date | date: "%B %d, %Y" }}
+
+      </span>
+
+    </div>
+
+
+    <h1 class="post-title">
+
+      {{ page.title }}
+
+    </h1>
+
+
+    {% if page.description %}
+
+      <p class="post-description">
+
+        {{ page.description }}
+
+      </p>
+
+    {% endif %}
+
+  </header>
+
+
+  <!-- =========================================
+       POST CONTENT
+       ========================================= -->
+
+  <div class="post-content">
+
     {{ content }}
+
   </div>
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>
+
+  <!-- =========================================
+       POST FOOTER
+       ========================================= -->
+
+  <footer class="post-footer">
+
+    <div class="post-footer-line"></div>
+
+
+    <div class="post-footer-content">
+
+      <div>
+
+        <span class="post-footer-label">
+          Thanks for reading
+        </span>
+
+        <p>
+          Found something interesting?
+          Maybe I'll write about it next.
+        </p>
+
+      </div>
+
+
+      <a
+        href="{{ site.baseurl }}/"
+        class="back-home"
+      >
+
+        ← Back home
+
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================
+       COMMENTS
+       ========================================= -->
 
   {% include disqus.html %}
+
 </article>
