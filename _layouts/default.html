@@ -30,9 +30,7 @@
 
   </head>
 
-
   <body>
-
 
     <!-- =========================================
          HEADER
@@ -44,23 +42,16 @@
 
         <header class="masthead clearfix">
 
-
-          <!-- Avatar -->
-
           <a
             href="{{ site.baseurl }}/"
             class="site-avatar"
           >
-
             <img
               src="{{ site.avatar }}"
               alt="{{ site.name }}"
-            >
-
+            />
           </a>
 
-
-          <!-- Site information -->
 
           <div class="site-info">
 
@@ -80,27 +71,23 @@
           </div>
 
 
-          <!-- Navigation -->
-
           <nav>
 
             <a href="{{ site.baseurl }}/">
               Blog
             </a>
 
-            <a href="{{ site.baseurl }}/about">
+            <a href="{{ site.baseurl }}/about/">
               About
             </a>
 
           </nav>
-
 
         </header>
 
       </div>
 
     </div>
-
 
 
     <!-- =========================================
@@ -116,7 +103,6 @@
       {{ content }}
 
     </div>
-
 
 
     <!-- =========================================
@@ -141,33 +127,23 @@
     {% include analytics.html %}
 
 
-
     <!-- =========================================
-         REALISTIC PIRATE FLAG
+         PIRATE CLOTH
          ========================================= -->
 
-    <div
-      id="pirate-intro"
+    <canvas
+      id="pirate-cloth"
       aria-hidden="true"
-    >
+    ></canvas>
 
-      <img
-        src="{{ site.baseurl }}/images/pirate-flag.png"
-        alt=""
-        class="pirate-flag"
-      >
-
-    </div>
-
-
-
-    <!-- =========================================
-         PIRATE FLAG STYLING
-         ========================================= -->
 
     <style>
 
-      #pirate-intro {
+      /* =========================================
+         CANVAS
+         ========================================= */
+
+      #pirate-cloth {
 
         position: fixed;
 
@@ -176,356 +152,1508 @@
         width: 100%;
         height: 100%;
 
-        overflow: hidden;
-
         pointer-events: none;
 
         z-index: 99999;
 
       }
 
-
-      .pirate-flag {
-
-        position: absolute;
-
-        top: -260px;
-
-        left: 50%;
-
-        width: 430px;
-
-        max-width: 42vw;
-
-        height: auto;
-
-        opacity: 0;
-
-        transform-origin: 8% 8%;
-
-        filter:
-          drop-shadow(
-            0 25px 30px
-            rgba(0, 0, 0, 0.5)
-          );
-
-        will-change:
-          transform,
-          opacity;
-
-        animation:
-          pirate-journey 6s
-          cubic-bezier(.22,.65,.24,1)
-          forwards;
-
-      }
-
-
-
-      /* ========================================
-         Main movement
-         ======================================== */
-
-      @keyframes pirate-journey {
-
-        /* Start above the screen */
-
-        0% {
-
-          opacity: 0;
-
-          transform:
-            translate(
-              -46vw,
-              -250px
-            )
-            rotate(-16deg)
-            scale(0.88);
-
-        }
-
-
-        /* Enter */
-
-        8% {
-
-          opacity: 1;
-
-        }
-
-
-        /* First drift */
-
-        20% {
-
-          transform:
-            translate(
-              -31vw,
-              5vh
-            )
-            rotate(-8deg)
-            scale(0.94);
-
-        }
-
-
-        /* Swing right */
-
-        35% {
-
-          transform:
-            translate(
-              -13vw,
-              15vh
-            )
-            rotate(4deg)
-            scale(0.99);
-
-        }
-
-
-        /* Central movement */
-
-        50% {
-
-          transform:
-            translate(
-              5vw,
-              30vh
-            )
-            rotate(-4deg)
-            scale(1);
-
-        }
-
-
-        /* Continue drifting */
-
-        65% {
-
-          transform:
-            translate(
-              17vw,
-              47vh
-            )
-            rotate(6deg)
-            scale(0.99);
-
-        }
-
-
-        /* Start disappearing */
-
-        82% {
-
-          opacity: 0.85;
-
-          transform:
-            translate(
-              25vw,
-              69vh
-            )
-            rotate(-4deg)
-            scale(0.95);
-
-        }
-
-
-        /* Exit */
-
-        100% {
-
-          opacity: 0;
-
-          transform:
-            translate(
-              35vw,
-              115vh
-            )
-            rotate(8deg)
-            scale(0.90);
-
-        }
-
-      }
-
-
-
-      /* ========================================
-         Very subtle rocking
-         ======================================== */
-
-      .pirate-flag {
-
-        animation-name:
-          pirate-journey,
-          pirate-rock;
-
-        animation-duration:
-          6s,
-          1.8s;
-
-        animation-delay:
-          0s,
-          0s;
-
-        animation-timing-function:
-          cubic-bezier(.22,.65,.24,1),
-          ease-in-out;
-
-        animation-iteration-count:
-          1,
-          infinite;
-
-        animation-fill-mode:
-          forwards,
-          both;
-
-      }
-
-
-
-      @keyframes pirate-rock {
-
-        0% {
-
-          margin-top: 0;
-
-        }
-
-        50% {
-
-          margin-top: 5px;
-
-        }
-
-        100% {
-
-          margin-top: 0;
-
-        }
-
-      }
-
-
-
-      /* ========================================
-         Mobile
-         ======================================== */
-
-      @media screen and (max-width: 700px) {
-
-        .pirate-flag {
-
-          width: 290px;
-
-          max-width: 68vw;
-
-          top: -180px;
-
-        }
-
-      }
-
-
-
-      /* ========================================
-         Reduced motion
-         ======================================== */
-
-      @media (prefers-reduced-motion: reduce) {
-
-        .pirate-flag {
-
-          animation: none;
-
-          display: none;
-
-        }
-
-      }
-
     </style>
 
 
-
-    <!-- =========================================
-         PIRATE FLAG SCRIPT
-         ========================================= -->
-
     <script>
 
-      document.addEventListener(
-        "DOMContentLoaded",
-        function () {
+      (function () {
+
+        "use strict";
 
 
-          /*
-             Only show the flag on the homepage.
-          */
+        /* =======================================
+           ONLY RUN ON HOMEPAGE
+           ======================================= */
 
-          const path =
-            window.location.pathname;
+        const currentPath =
+          window.location.pathname;
 
-          const basePath =
-            "{{ site.baseurl }}/";
+        const basePath =
+          "{{ site.baseurl }}/";
 
-
-          const isHomepage =
-            path === "/" ||
-            path === basePath ||
-            path ===
-              basePath.replace(/\/$/, "");
+        const cleanBasePath =
+          basePath.replace(/\/$/, "");
 
 
-          if (!isHomepage) {
-
-            return;
-
-          }
-
-
-          /*
-             Find the animation container.
-          */
-
-          const intro =
-            document.getElementById(
-              "pirate-intro"
-            );
+        const isHomepage =
+          currentPath === "/" ||
+          currentPath === basePath ||
+          currentPath === cleanBasePath;
 
 
-          if (!intro) {
-
-            return;
-
-          }
+        if (!isHomepage) {
+          return;
+        }
 
 
-          /*
-             Remove everything after
-             the animation has finished.
-          */
+        /* =======================================
+           CANVAS
+           ======================================= */
 
-          setTimeout(
-            function () {
-
-              if (intro) {
-
-                intro.remove();
-
-              }
-
-            },
-            6500
+        const canvas =
+          document.getElementById(
+            "pirate-cloth"
           );
 
 
+        if (!canvas) {
+          return;
         }
-      );
+
+
+        const ctx =
+          canvas.getContext(
+            "2d"
+          );
+
+
+        if (!ctx) {
+          return;
+        }
+
+
+        let width = 0;
+        let height = 0;
+
+        let devicePixelRatio =
+          Math.min(
+            window.devicePixelRatio || 1,
+            1.5
+          );
+
+
+        function resizeCanvas() {
+
+          width =
+            window.innerWidth;
+
+          height =
+            window.innerHeight;
+
+
+          devicePixelRatio =
+            Math.min(
+              window.devicePixelRatio || 1,
+              1.5
+            );
+
+
+          canvas.width =
+            Math.round(
+              width *
+              devicePixelRatio
+            );
+
+
+          canvas.height =
+            Math.round(
+              height *
+              devicePixelRatio
+            );
+
+
+          canvas.style.width =
+            width + "px";
+
+
+          canvas.style.height =
+            height + "px";
+
+
+          ctx.setTransform(
+            devicePixelRatio,
+            0,
+            0,
+            devicePixelRatio,
+            0,
+            0
+          );
+
+        }
+
+
+        resizeCanvas();
+
+
+        window.addEventListener(
+          "resize",
+          resizeCanvas
+        );
+
+
+        /* =======================================
+           FLAG IMAGE
+           ======================================= */
+
+        const flagImage =
+          new Image();
+
+
+        flagImage.src =
+          "{{ site.baseurl }}/images/pirate-flag.png";
+
+
+        /* =======================================
+           SETTINGS
+           ======================================= */
+
+        const COLUMNS = 18;
+
+        const ROWS = 10;
+
+        const FLAG_WIDTH = 390;
+
+        const GRAVITY = 0.16;
+
+        const DAMPING = 0.985;
+
+        const WIND_STRENGTH = 0.22;
+
+        const CONSTRAINT_PASSES = 5;
+
+        const TOTAL_TIME = 7200;
+
+
+        /*
+          The generated PNG includes the pole
+          on the left.
+
+          This value tells the simulation that
+          roughly the first 13% is the pole.
+        */
+
+        const CLOTH_START =
+          0.13;
+
+
+        /* =======================================
+           PARTICLES
+           ======================================= */
+
+        class Particle {
+
+          constructor(
+            x,
+            y,
+            pinned
+          ) {
+
+            this.x = x;
+
+            this.y = y;
+
+            this.previousX = x;
+
+            this.previousY = y;
+
+            this.pinned =
+              pinned;
+
+          }
+
+
+          update() {
+
+            if (this.pinned) {
+              return;
+            }
+
+
+            const velocityX =
+              (
+                this.x -
+                this.previousX
+              ) *
+              DAMPING;
+
+
+            const velocityY =
+              (
+                this.y -
+                this.previousY
+              ) *
+              DAMPING;
+
+
+            this.previousX =
+              this.x;
+
+
+            this.previousY =
+              this.y;
+
+
+            /*
+              Gravity.
+            */
+
+            this.y +=
+              velocityY +
+              GRAVITY;
+
+
+            /*
+              Smooth wind.
+
+              Wind changes slowly across
+              the width and height of
+              the cloth.
+            */
+
+            const windWave =
+              Math.sin(
+                animationTime * 0.0016 +
+                this.y * 0.018 +
+                this.x * 0.005
+              );
+
+
+            const windWave2 =
+              Math.sin(
+                animationTime * 0.0034 +
+                this.y * 0.011
+              );
+
+
+            const wind =
+              windWave *
+              WIND_STRENGTH;
+
+
+            this.x +=
+              velocityX +
+              wind +
+              windWave2 *
+              0.035;
+
+          }
+
+        }
+
+
+        /* =======================================
+           VARIABLES
+           ======================================= */
+
+        let particles = [];
+
+        let constraints = [];
+
+        let animationTime = 0;
+
+        let startTime = 0;
+
+        let clothWidth = 0;
+
+        let clothHeight = 0;
+
+        let horizontalSpacing = 0;
+
+        let verticalSpacing = 0;
+
+
+        /* =======================================
+           PARTICLE INDEX
+           ======================================= */
+
+        function particleIndex(
+          x,
+          y
+        ) {
+
+          return (
+            y * COLUMNS +
+            x
+          );
+
+        }
+
+
+        /* =======================================
+           CONSTRAINTS
+           ======================================= */
+
+        function createConstraint(
+          first,
+          second,
+          distance
+        ) {
+
+          constraints.push({
+            first,
+            second,
+            distance
+          });
+
+        }
+
+
+        /* =======================================
+           BUILD CLOTH
+           ======================================= */
+
+        function createCloth() {
+
+          particles = [];
+
+          constraints = [];
+
+
+          /*
+            Keep the same approximate aspect
+            ratio as the source image.
+          */
+
+          const clothSourceWidth =
+            flagImage.width *
+            (1 - CLOTH_START);
+
+
+          const clothSourceHeight =
+            flagImage.height;
+
+
+          const imageRatio =
+            clothSourceHeight /
+            clothSourceWidth;
+
+
+          clothWidth =
+            FLAG_WIDTH;
+
+
+          clothHeight =
+            Math.min(
+              FLAG_WIDTH *
+              imageRatio,
+              280
+            );
+
+
+          horizontalSpacing =
+            clothWidth /
+            (COLUMNS - 1);
+
+
+          verticalSpacing =
+            clothHeight /
+            (ROWS - 1);
+
+
+          /*
+            Create particles.
+          */
+
+          for (
+            let y = 0;
+            y < ROWS;
+            y++
+          ) {
+
+            for (
+              let x = 0;
+              x < COLUMNS;
+              x++
+            ) {
+
+              const px =
+                x *
+                horizontalSpacing;
+
+
+              const py =
+                y *
+                verticalSpacing;
+
+
+              /*
+                Every particle on the
+                top edge is attached
+                to the pole.
+              */
+
+              const pinned =
+                y === 0;
+
+
+              particles.push(
+                new Particle(
+                  px,
+                  py,
+                  pinned
+                )
+              );
+
+            }
+
+          }
+
+
+          /*
+            Horizontal constraints.
+          */
+
+          for (
+            let y = 0;
+            y < ROWS;
+            y++
+          ) {
+
+            for (
+              let x = 0;
+              x < COLUMNS - 1;
+              x++
+            ) {
+
+              createConstraint(
+                particleIndex(
+                  x,
+                  y
+                ),
+                particleIndex(
+                  x + 1,
+                  y
+                ),
+                horizontalSpacing
+              );
+
+            }
+
+          }
+
+
+          /*
+            Vertical constraints.
+          */
+
+          for (
+            let y = 0;
+            y < ROWS - 1;
+            y++
+          ) {
+
+            for (
+              let x = 0;
+              x < COLUMNS;
+              x++
+            ) {
+
+              createConstraint(
+                particleIndex(
+                  x,
+                  y
+                ),
+                particleIndex(
+                  x,
+                  y + 1
+                ),
+                verticalSpacing
+              );
+
+            }
+
+          }
+
+
+          /*
+            Diagonal constraints.
+
+            These make the fabric behave
+            more naturally.
+          */
+
+          const diagonalDistance =
+            Math.sqrt(
+              horizontalSpacing *
+              horizontalSpacing +
+
+              verticalSpacing *
+              verticalSpacing
+            );
+
+
+          for (
+            let y = 0;
+            y < ROWS - 1;
+            y++
+          ) {
+
+            for (
+              let x = 0;
+              x < COLUMNS - 1;
+              x++
+            ) {
+
+              createConstraint(
+                particleIndex(
+                  x,
+                  y
+                ),
+                particleIndex(
+                  x + 1,
+                  y + 1
+                ),
+                diagonalDistance
+              );
+
+
+              createConstraint(
+                particleIndex(
+                  x + 1,
+                  y
+                ),
+                particleIndex(
+                  x,
+                  y + 1
+                ),
+                diagonalDistance
+              );
+
+            }
+
+          }
+
+        }
+
+
+        /* =======================================
+           SOLVE CLOTH
+           ======================================= */
+
+        function solveConstraints() {
+
+          for (
+            let i = 0;
+            i < constraints.length;
+            i++
+          ) {
+
+            const constraint =
+              constraints[i];
+
+
+            const first =
+              particles[
+                constraint.first
+              ];
+
+
+            const second =
+              particles[
+                constraint.second
+              ];
+
+
+            const dx =
+              second.x -
+              first.x;
+
+
+            const dy =
+              second.y -
+              first.y;
+
+
+            const distance =
+              Math.sqrt(
+                dx * dx +
+                dy * dy
+              );
+
+
+            if (
+              distance === 0
+            ) {
+              continue;
+            }
+
+
+            const difference =
+              (
+                constraint.distance -
+                distance
+              ) /
+              distance;
+
+
+            /*
+              Slightly soft fabric.
+            */
+
+            const stiffness =
+              0.72;
+
+
+            const offsetX =
+              dx *
+              difference *
+              stiffness *
+              0.5;
+
+
+            const offsetY =
+              dy *
+              difference *
+              stiffness *
+              0.5;
+
+
+            if (
+              !first.pinned
+            ) {
+
+              first.x -=
+                offsetX;
+
+              first.y -=
+                offsetY;
+
+            }
+
+
+            if (
+              !second.pinned
+            ) {
+
+              second.x +=
+                offsetX;
+
+              second.y +=
+                offsetY;
+
+            }
+
+          }
+
+        }
+
+
+        /* =======================================
+           MOVE POLE / ATTACHMENT POINTS
+           ======================================= */
+
+        function updatePole(
+          progress
+        ) {
+
+          /*
+            Ease into the screen.
+          */
+
+          const eased =
+            1 -
+            Math.pow(
+              1 - progress,
+              3
+            );
+
+
+          /*
+            Start above screen.
+
+            Finish around the lower
+            part of the viewport.
+          */
+
+          let poleX =
+            width * 0.68;
+
+
+          let poleY =
+            -180 +
+            eased *
+            (
+              height * 0.82 +
+              180
+            );
+
+
+          /*
+            Very gentle drifting.
+          */
+
+          poleX +=
+            Math.sin(
+              animationTime *
+              0.00075
+            ) *
+            32;
+
+
+          poleY +=
+            Math.sin(
+              animationTime *
+              0.00095
+            ) *
+            8;
+
+
+          /*
+            Small natural rotation.
+          */
+
+          const angle =
+            Math.sin(
+              animationTime *
+              0.001
+            ) *
+            0.035;
+
+
+          /*
+            Pin top edge.
+          */
+
+          for (
+            let x = 0;
+            x < COLUMNS;
+            x++
+          ) {
+
+            const particle =
+              particles[
+                particleIndex(
+                  x,
+                  0
+                )
+              ];
+
+
+            const localX =
+              x *
+              horizontalSpacing;
+
+
+            particle.x =
+              poleX +
+              Math.cos(angle) *
+              localX;
+
+
+            particle.y =
+              poleY +
+              Math.sin(angle) *
+              localX;
+
+          }
+
+
+          return {
+            x: poleX,
+            y: poleY,
+            angle
+          };
+
+        }
+
+
+        /* =======================================
+           DRAW TRIANGLE
+           ======================================= */
+
+        function drawTriangle(
+          sx1,
+          sy1,
+          sx2,
+          sy2,
+          sx3,
+          sy3,
+
+          dx1,
+          dy1,
+          dx2,
+          dy2,
+          dx3,
+          dy3
+        ) {
+
+          const sourceU =
+            sx2 - sx1;
+
+
+          const sourceV =
+            sy2 - sy1;
+
+
+          const sourceU2 =
+            sx3 - sx1;
+
+
+          const sourceV2 =
+            sy3 - sy1;
+
+
+          const destinationU =
+            dx2 - dx1;
+
+
+          const destinationV =
+            dy2 - dy1;
+
+
+          const destinationU2 =
+            dx3 - dx1;
+
+
+          const destinationV2 =
+            dy3 - dy1;
+
+
+          const determinant =
+            sourceU *
+            sourceV2 -
+            sourceV *
+            sourceU2;
+
+
+          if (
+            Math.abs(
+              determinant
+            ) < 0.001
+          ) {
+
+            return;
+
+          }
+
+
+          const a =
+            (
+              destinationU *
+              sourceV2 -
+              destinationU2 *
+              sourceV
+            ) /
+            determinant;
+
+
+          const c =
+            (
+              destinationU2 *
+              sourceU -
+              destinationU *
+              sourceU2
+            ) /
+            determinant;
+
+
+          const b =
+            (
+              destinationV *
+              sourceV2 -
+              destinationV2 *
+              sourceV
+            ) /
+            determinant;
+
+
+          const d =
+            (
+              destinationV2 *
+              sourceU -
+              destinationV *
+              sourceU2
+            ) /
+            determinant;
+
+
+          const e =
+            dx1 -
+            a * sx1 -
+            c * sy1;
+
+
+          const f =
+            dy1 -
+            b * sx1 -
+            d * sy1;
+
+
+          ctx.save();
+
+
+          /*
+            Clip to the destination triangle.
+          */
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            dx1,
+            dy1
+          );
+
+          ctx.lineTo(
+            dx2,
+            dy2
+          );
+
+          ctx.lineTo(
+            dx3,
+            dy3
+          );
+
+          ctx.closePath();
+
+          ctx.clip();
+
+
+          /*
+            Map image pixels to the
+            destination triangle.
+          */
+
+          ctx.setTransform(
+            a * devicePixelRatio,
+            b * devicePixelRatio,
+            c * devicePixelRatio,
+            d * devicePixelRatio,
+            e * devicePixelRatio,
+            f * devicePixelRatio
+          );
+
+
+          ctx.drawImage(
+            flagImage,
+            0,
+            0
+          );
+
+
+          ctx.restore();
+
+
+          /*
+            Restore normal canvas transform.
+          */
+
+          ctx.setTransform(
+            devicePixelRatio,
+            0,
+            0,
+            devicePixelRatio,
+            0,
+            0
+          );
+
+        }
+
+
+        /* =======================================
+           DRAW FABRIC
+           ======================================= */
+
+        function drawCloth() {
+
+          const sourceX =
+            flagImage.width *
+            CLOTH_START;
+
+
+          const sourceWidth =
+            flagImage.width -
+            sourceX;
+
+
+          const sourceHorizontalStep =
+            sourceWidth /
+            (COLUMNS - 1);
+
+
+          const sourceVerticalStep =
+            flagImage.height /
+            (ROWS - 1);
+
+
+          for (
+            let y = 0;
+            y < ROWS - 1;
+            y++
+          ) {
+
+            for (
+              let x = 0;
+              x < COLUMNS - 1;
+              x++
+            ) {
+
+              const topLeft =
+                particles[
+                  particleIndex(
+                    x,
+                    y
+                  )
+                ];
+
+
+              const topRight =
+                particles[
+                  particleIndex(
+                    x + 1,
+                    y
+                  )
+                ];
+
+
+              const bottomLeft =
+                particles[
+                  particleIndex(
+                    x,
+                    y + 1
+                  )
+                ];
+
+
+              const bottomRight =
+                particles[
+                  particleIndex(
+                    x + 1,
+                    y + 1
+                  )
+                ];
+
+
+              const sx1 =
+                sourceX +
+                x *
+                sourceHorizontalStep;
+
+
+              const sy1 =
+                y *
+                sourceVerticalStep;
+
+
+              const sx2 =
+                sourceX +
+                (x + 1) *
+                sourceHorizontalStep;
+
+
+              const sy2 =
+                y *
+                sourceVerticalStep;
+
+
+              const sx3 =
+                sourceX +
+                x *
+                sourceHorizontalStep;
+
+
+              const sy3 =
+                (y + 1) *
+                sourceVerticalStep;
+
+
+              const sx4 =
+                sourceX +
+                (x + 1) *
+                sourceHorizontalStep;
+
+
+              const sy4 =
+                (y + 1) *
+                sourceVerticalStep;
+
+
+              /*
+                Triangle one.
+              */
+
+              drawTriangle(
+                sx1,
+                sy1,
+
+                sx2,
+                sy2,
+
+                sx3,
+                sy3,
+
+                topLeft.x,
+                topLeft.y,
+
+                topRight.x,
+                topRight.y,
+
+                bottomLeft.x,
+                bottomLeft.y
+              );
+
+
+              /*
+                Triangle two.
+              */
+
+              drawTriangle(
+                sx2,
+                sy2,
+
+                sx4,
+                sy4,
+
+                sx3,
+                sy3,
+
+                topRight.x,
+                topRight.y,
+
+                bottomRight.x,
+                bottomRight.y,
+
+                bottomLeft.x,
+                bottomLeft.y
+              );
+
+            }
+
+          }
+
+        }
+
+
+        /* =======================================
+           DRAW POLE
+           ======================================= */
+
+        function drawPole(
+          pole
+        ) {
+
+          ctx.save();
+
+
+          ctx.translate(
+            pole.x,
+            pole.y
+          );
+
+
+          ctx.rotate(
+            pole.angle
+          );
+
+
+          /*
+            Shadow.
+          */
+
+          ctx.strokeStyle =
+            "rgba(0, 0, 0, 0.45)";
+
+
+          ctx.lineWidth =
+            7;
+
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            0,
+            -8
+          );
+
+          ctx.lineTo(
+            0,
+            clothHeight + 25
+          );
+
+          ctx.stroke();
+
+
+          /*
+            Pole.
+          */
+
+          ctx.strokeStyle =
+            "#62656b";
+
+
+          ctx.lineWidth =
+            4;
+
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            0,
+            -8
+          );
+
+          ctx.lineTo(
+            0,
+            clothHeight + 25
+          );
+
+          ctx.stroke();
+
+
+          /*
+            Top cap.
+          */
+
+          ctx.fillStyle =
+            "#a7a9ad";
+
+
+          ctx.beginPath();
+
+          ctx.arc(
+            0,
+            -9,
+            5,
+            0,
+            Math.PI * 2
+          );
+
+          ctx.fill();
+
+
+          ctx.restore();
+
+        }
+
+
+        /* =======================================
+           DRAW FRAME
+           ======================================= */
+
+        function drawFrame(
+          pole
+        ) {
+
+          ctx.setTransform(
+            devicePixelRatio,
+            0,
+            0,
+            devicePixelRatio,
+            0,
+            0
+          );
+
+
+          ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+          );
+
+
+          /*
+            Fade toward the end.
+          */
+
+          let opacity = 1;
+
+
+          if (
+            animationTime > 5400
+          ) {
+
+            opacity =
+              Math.max(
+                0,
+                1 -
+                (
+                  animationTime -
+                  5400
+                ) /
+                1800
+              );
+
+          }
+
+
+          ctx.globalAlpha =
+            opacity;
+
+
+          drawPole(
+            pole
+          );
+
+
+          drawCloth();
+
+
+          ctx.globalAlpha =
+            1;
+
+        }
+
+
+        /* =======================================
+           START
+           ======================================= */
+
+        function start() {
+
+          createCloth();
+
+
+          startTime =
+            performance.now();
+
+
+          requestAnimationFrame(
+            frame
+          );
+
+        }
+
+
+        /* =======================================
+           ANIMATION LOOP
+           ======================================= */
+
+        function frame(
+          now
+        ) {
+
+          animationTime =
+            now -
+            startTime;
+
+
+          if (
+            animationTime >
+            TOTAL_TIME
+          ) {
+
+            canvas.remove();
+
+            return;
+
+          }
+
+
+          /*
+            Progress of the fall.
+
+            0 -> top of screen
+            1 -> mostly down page
+          */
+
+          const progress =
+            Math.min(
+              animationTime /
+              4600,
+              1
+            );
+
+
+          /*
+            Update attached edge.
+          */
+
+          const pole =
+            updatePole(
+              progress
+            );
+
+
+          /*
+            Update physics particles.
+          */
+
+          for (
+            let i = 0;
+            i < particles.length;
+            i++
+          ) {
+
+            particles[i].update();
+
+          }
+
+
+          /*
+            Solve cloth multiple times
+            for stability.
+          */
+
+          for (
+            let i = 0;
+            i < CONSTRAINT_PASSES;
+            i++
+          ) {
+
+            solveConstraints();
+
+          }
+
+
+          drawFrame(
+            pole
+          );
+
+
+          requestAnimationFrame(
+            frame
+          );
+
+        }
+
+
+        /* =======================================
+           IMAGE READY
+           ======================================= */
+
+        flagImage.onload =
+          function () {
+
+            start();
+
+          };
+
+
+        flagImage.onerror =
+          function () {
+
+            /*
+              If the image can't be loaded,
+              simply remove the canvas rather
+              than showing an error on the site.
+            */
+
+            canvas.remove();
+
+          };
+
+
+        /* =======================================
+           REDUCED MOTION
+           ======================================= */
+
+        const reducedMotion =
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          );
+
+
+        if (
+          reducedMotion.matches
+        ) {
+
+          canvas.remove();
+
+          return;
+
+        }
+
+
+      })();
 
     </script>
-
 
   </body>
 </html>
