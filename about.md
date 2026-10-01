@@ -6,10 +6,6 @@ permalink: /about/
 
 <div class="about-page">
 
-  <div class="about-avatar">
-    👋
-  </div>
-
   <span class="section-label">ABOUT</span>
 
   <h1>Hey, I'm PorkSandwitch.</h1>
@@ -28,8 +24,6 @@ permalink: /about/
       <span>GitHub</span>
       <span>↗</span>
     </a>
-
-    <!-- Add more links later -->
 
     <a href="#"
        class="about-link coming-soon"
