@@ -4,33 +4,40 @@
 @import "reset";
 @import "variables";
 
+
 /* =========================================
-   MODERN DARK THEME
+   BASE
    ========================================= */
 
 html {
   scroll-behavior: smooth;
 }
 
+
 body {
+
   margin: 0;
 
   background:
+
     radial-gradient(
       circle at 10% 0%,
-      rgba(99, 102, 241, 0.12),
+      rgba(99, 102, 241, 0.13),
       transparent 30%
     ),
+
     radial-gradient(
       circle at 90% 15%,
       rgba(56, 189, 248, 0.08),
-      transparent 28%
+      transparent 30%
     ),
+
     #08090d;
 
   color: #b8bbc7;
 
   font-family:
+
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -40,33 +47,47 @@ body {
     sans-serif;
 
   font-size: 16px;
+
   line-height: 1.7;
+
 }
 
-
-/* =========================================
-   GENERAL
-   ========================================= */
 
 .container {
+
   max-width: 1000px;
+
   margin: 0 auto;
+
   padding: 0 25px;
+
 }
+
 
 a {
+
   color: #9da7ff;
+
   text-decoration: none;
+
   transition: 0.2s ease;
+
 }
+
 
 a:hover {
+
   color: #c1c7ff;
+
 }
 
+
 ::selection {
+
   background: #6366f1;
+
   color: white;
+
 }
 
 
@@ -75,10 +96,14 @@ a:hover {
    ========================================= */
 
 .wrapper-masthead {
+
   margin-bottom: 65px;
+
 }
 
+
 .masthead {
+
   padding: 22px 0;
 
   border-bottom:
@@ -88,19 +113,27 @@ a:hover {
     rgba(8, 9, 13, 0.72);
 
   backdrop-filter: blur(15px);
+
 }
 
+
 .site-avatar {
+
   float: left;
 
   width: 54px;
+
   height: 54px;
 
   margin-right: 15px;
+
 }
 
+
 .site-avatar img {
+
   width: 54px;
+
   height: 54px;
 
   object-fit: cover;
@@ -112,33 +145,47 @@ a:hover {
 
   box-shadow:
     0 8px 30px rgba(0, 0, 0, 0.35);
+
 }
+
 
 .site-info {
+
   float: left;
+
 }
 
+
 .site-name {
+
   margin: 0;
 
   color: #ffffff;
 
   font-size: 23px;
+
   font-weight: 750;
 
   letter-spacing: -0.5px;
+
 }
+
 
 .site-name a {
+
   color: #ffffff;
+
 }
 
+
 .site-description {
+
   margin: 0;
 
   color: #777c8c;
 
   font-size: 13px;
+
 }
 
 
@@ -147,11 +194,16 @@ a:hover {
    ========================================= */
 
 nav {
+
   float: right;
+
   margin-top: 12px;
+
 }
 
+
 nav a {
+
   display: inline-block;
 
   margin-left: 5px;
@@ -163,13 +215,17 @@ nav a {
   color: #9498a7;
 
   font-size: 14px;
+
 }
 
+
 nav a:hover {
+
   color: #ffffff;
 
   background:
     rgba(255, 255, 255, 0.06);
+
 }
 
 
@@ -178,42 +234,51 @@ nav a:hover {
    ========================================= */
 
 .hero {
+
   position: relative;
 
-  padding: 75px 0 100px;
+  padding: 75px 0 105px;
 
   text-align: center;
+
 }
 
+
 .hero::before {
+
   content: "";
 
   position: absolute;
 
-  width: 280px;
-  height: 280px;
+  width: 300px;
+
+  height: 300px;
 
   left: 50%;
-  top: 40px;
+
+  top: 20px;
 
   transform: translateX(-50%);
 
   background:
     rgba(99, 102, 241, 0.12);
 
-  filter: blur(100px);
+  filter: blur(110px);
 
   pointer-events: none;
+
 }
 
+
 .hero-badge {
+
   position: relative;
 
   display: inline-block;
 
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 
-  padding: 7px 14px;
+  padding: 7px 15px;
 
   border:
     1px solid rgba(139, 156, 255, 0.18);
@@ -226,14 +291,17 @@ nav a:hover {
   color: #a6afff;
 
   font-size: 13px;
+
 }
 
+
 .hero h1 {
+
   position: relative;
 
   margin: 0 auto;
 
-  max-width: 800px;
+  max-width: 850px;
 
   color: #f7f8ff;
 
@@ -242,10 +310,14 @@ nav a:hover {
   line-height: 1.08;
 
   letter-spacing: -3px;
+
 }
 
+
 .hero h1 span {
+
   background:
+
     linear-gradient(
       90deg,
       #a5b4fc,
@@ -254,15 +326,19 @@ nav a:hover {
     );
 
   -webkit-background-clip: text;
+
   background-clip: text;
 
   color: transparent;
+
 }
 
+
 .hero-text {
+
   position: relative;
 
-  max-width: 620px;
+  max-width: 680px;
 
   margin: 28px auto 0;
 
@@ -271,6 +347,7 @@ nav a:hover {
   font-size: 18px;
 
   line-height: 1.7;
+
 }
 
 
@@ -279,6 +356,7 @@ nav a:hover {
    ========================================= */
 
 .hero-buttons {
+
   position: relative;
 
   display: flex;
@@ -288,9 +366,12 @@ nav a:hover {
   gap: 12px;
 
   margin-top: 32px;
+
 }
 
+
 .button {
+
   display: inline-block;
 
   padding: 11px 19px;
@@ -302,16 +383,24 @@ nav a:hover {
   font-weight: 600;
 
   transition:
+
     transform 0.2s ease,
     box-shadow 0.2s ease;
+
 }
+
 
 .button:hover {
+
   transform: translateY(-2px);
+
 }
 
+
 .primary-button {
+
   background:
+
     linear-gradient(
       135deg,
       #6366f1,
@@ -321,17 +410,27 @@ nav a:hover {
   color: white;
 
   box-shadow:
-    0 8px 25px rgba(99, 102, 241, 0.22);
+
+    0 8px 25px
+    rgba(99, 102, 241, 0.22);
+
 }
 
+
 .primary-button:hover {
+
   color: white;
 
   box-shadow:
-    0 12px 35px rgba(99, 102, 241, 0.35);
+
+    0 12px 35px
+    rgba(99, 102, 241, 0.35);
+
 }
 
+
 .secondary-button {
+
   border:
     1px solid rgba(255, 255, 255, 0.1);
 
@@ -339,13 +438,17 @@ nav a:hover {
     rgba(255, 255, 255, 0.035);
 
   color: #c1c4ce;
+
 }
 
+
 .secondary-button:hover {
+
   color: white;
 
   background:
     rgba(255, 255, 255, 0.07);
+
 }
 
 
@@ -354,10 +457,14 @@ nav a:hover {
    ========================================= */
 
 .section-heading {
+
   margin-bottom: 30px;
+
 }
 
+
 .section-label {
+
   color: #7f8cff;
 
   font-size: 11px;
@@ -365,9 +472,12 @@ nav a:hover {
   font-weight: 700;
 
   letter-spacing: 2px;
+
 }
 
+
 .section-heading h2 {
+
   margin: 5px 0 5px;
 
   color: #f2f3f8;
@@ -375,14 +485,18 @@ nav a:hover {
   font-size: 30px;
 
   letter-spacing: -1px;
+
 }
 
+
 .section-heading p {
+
   margin: 0;
 
   color: #737887;
 
   font-size: 14px;
+
 }
 
 
@@ -391,60 +505,94 @@ nav a:hover {
    ========================================= */
 
 .interests {
-  padding: 20px 0 100px;
+
+  padding: 20px 0 105px;
+
 }
 
+
 .interest-grid {
+
   display: grid;
 
   grid-template-columns:
     repeat(3, 1fr);
 
   gap: 15px;
+
 }
 
+
 .interest-card {
-  padding: 27px;
+
+  padding: 28px;
 
   background:
-    rgba(255, 255, 255, 0.025);
+
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.018)
+    );
 
   border:
-    1px solid rgba(255, 255, 255, 0.07);
+    1px solid rgba(255, 255, 255, 0.075);
 
   border-radius: 17px;
 
   transition:
+
     transform 0.25s ease,
     background 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
 }
 
+
 .interest-card:hover {
+
   transform: translateY(-5px);
 
   background:
-    rgba(255, 255, 255, 0.045);
+
+    linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.065),
+      rgba(56, 189, 248, 0.025)
+    );
 
   border-color:
-    rgba(139, 156, 255, 0.2);
+    rgba(139, 156, 255, 0.25);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.2);
+
 }
+
 
 .interest-icon {
-  font-size: 25px;
 
-  margin-bottom: 12px;
+  margin-bottom: 13px;
+
+  font-size: 27px;
+
 }
 
+
 .interest-card h3 {
-  margin: 0 0 7px;
+
+  margin: 0 0 8px;
 
   color: #eeeeF5;
 
   font-size: 18px;
+
 }
 
+
 .interest-card p {
+
   margin: 0;
 
   color: #777c8b;
@@ -452,6 +600,7 @@ nav a:hover {
   font-size: 14px;
 
   line-height: 1.65;
+
 }
 
 
@@ -460,122 +609,218 @@ nav a:hover {
    ========================================= */
 
 .posts-section {
-  padding: 0 0 100px;
+
+  padding: 0 0 110px;
+
 }
+
 
 .posts-heading {
-  margin-bottom: 25px;
+
+  margin-bottom: 28px;
+
 }
 
+
 .posts {
+
   display: flex;
 
   flex-direction: column;
 
-  gap: 12px;
+  gap: 14px;
+
 }
 
+
 .posts > .post {
+
   position: relative;
 
   margin: 0;
 
-  padding: 25px 27px;
+  padding: 27px 30px;
 
   background:
-    rgba(255, 255, 255, 0.025);
+
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.018)
+    );
 
   border:
-    1px solid rgba(255, 255, 255, 0.07);
+    1px solid rgba(255, 255, 255, 0.075);
 
-  border-radius: 16px;
+  border-radius: 17px;
 
   transition:
+
     transform 0.25s ease,
     background 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
 }
+
 
 .posts > .post:hover {
-  transform: translateX(4px);
+
+  transform: translateY(-3px);
 
   background:
-    rgba(255, 255, 255, 0.045);
+
+    linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.065),
+      rgba(56, 189, 248, 0.025)
+    );
 
   border-color:
-    rgba(139, 156, 255, 0.2);
+    rgba(139, 156, 255, 0.25);
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.22);
+
 }
 
+
+/* Post information */
+
 .post-top {
+
   display: flex;
 
   justify-content: space-between;
 
   align-items: center;
 
-  margin-bottom: 8px;
+  margin-bottom: 11px;
+
 }
 
-.post-number {
-  color: #6366f1;
 
-  font-size: 12px;
+.post-category {
+
+  display: inline-block;
+
+  padding: 4px 9px;
+
+  background:
+    rgba(99, 102, 241, 0.08);
+
+  border:
+    1px solid rgba(139, 156, 255, 0.15);
+
+  border-radius: 6px;
+
+  color: #8995ff;
+
+  font-size: 10px;
 
   font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+
 }
+
 
 .post-date {
-  color: #5f6370;
+
+  color: #606572;
 
   font-size: 12px;
+
 }
+
+
+/* Post title */
 
 .post h3 {
-  margin: 0 0 7px;
 
-  font-size: 21px;
+  margin: 0 0 8px;
 
-  letter-spacing: -0.3px;
+  font-size: 23px;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.4px;
+
 }
+
 
 .post h3 a {
-  color: #eceef5;
+
+  color: #eef0f7;
+
 }
+
 
 .post h3 a:hover {
-  color: #a5afff;
+
+  color: #aab3ff;
+
 }
 
+
+/* Post preview */
+
 .post .entry {
-  color: #7f8492;
+
+  max-width: 750px;
+
+  color: #858a99;
 
   font-size: 14px;
 
-  line-height: 1.6;
+  line-height: 1.65;
+
 }
+
 
 .post .entry p {
+
   margin: 0;
+
 }
 
+
+/* Read more */
+
 .read-more {
-  display: inline-block;
 
-  margin-top: 13px;
+  display: inline-flex;
 
-  color: #8995ff;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 15px;
+
+  color: #8d98ff;
 
   font-size: 13px;
 
   font-weight: 600;
+
 }
+
 
 .read-more span {
-  transition: 0.2s ease;
+
+  transition:
+    transform 0.2s ease;
+
 }
 
+
 .read-more:hover span {
-  margin-left: 4px;
+
+  transform:
+    translateX(4px);
+
 }
 
 
@@ -584,10 +829,14 @@ nav a:hover {
    ========================================= */
 
 .closing-section {
+
   padding-bottom: 100px;
+
 }
 
+
 .closing-card {
+
   position: relative;
 
   overflow: hidden;
@@ -597,6 +846,7 @@ nav a:hover {
   text-align: center;
 
   background:
+
     linear-gradient(
       135deg,
       rgba(99, 102, 241, 0.09),
@@ -607,15 +857,20 @@ nav a:hover {
     1px solid rgba(139, 156, 255, 0.13);
 
   border-radius: 22px;
+
 }
 
+
 .closing-glow {
+
   position: absolute;
 
   width: 250px;
+
   height: 250px;
 
   left: 50%;
+
   top: -150px;
 
   transform: translateX(-50%);
@@ -626,9 +881,12 @@ nav a:hover {
   filter: blur(90px);
 
   pointer-events: none;
+
 }
 
+
 .closing-card h2 {
+
   position: relative;
 
   margin: 10px 0 15px;
@@ -640,9 +898,12 @@ nav a:hover {
   line-height: 1.2;
 
   letter-spacing: -1px;
+
 }
 
+
 .closing-card p {
+
   position: relative;
 
   max-width: 500px;
@@ -652,6 +913,7 @@ nav a:hover {
   color: #818695;
 
   font-size: 14px;
+
 }
 
 
@@ -660,6 +922,7 @@ nav a:hover {
    ========================================= */
 
 .wrapper-footer {
+
   margin-top: 0;
 
   border-top:
@@ -667,14 +930,18 @@ nav a:hover {
 
   background:
     rgba(255, 255, 255, 0.015);
+
 }
 
+
 footer {
+
   padding: 30px 0;
 
   color: #555a68;
 
   text-align: center;
+
 }
 
 
@@ -684,76 +951,145 @@ footer {
 
 @media screen and (max-width: 700px) {
 
+
   .container {
+
     padding: 0 18px;
+
   }
+
 
   .wrapper-masthead {
+
     margin-bottom: 30px;
+
   }
+
 
   .masthead {
+
     text-align: center;
+
   }
 
+
   .site-avatar {
+
     float: none;
 
     display: block;
 
     margin: 0 auto 10px;
+
   }
+
 
   .site-info {
+
     float: none;
+
   }
 
+
   nav {
+
     float: none;
 
     margin-top: 15px;
+
   }
+
 
   nav a {
+
     margin: 2px;
+
   }
+
 
   .hero {
-    padding: 55px 0 70px;
+
+    padding: 55px 0 75px;
+
   }
 
+
   .hero h1 {
+
     font-size: 43px;
 
     letter-spacing: -2px;
+
   }
+
 
   .hero-text {
+
     font-size: 16px;
+
   }
 
+
   .hero-buttons {
+
     flex-direction: column;
 
     align-items: stretch;
 
     padding: 0 25px;
+
   }
 
+
   .interest-grid {
+
     grid-template-columns: 1fr;
+
   }
+
 
   .interests,
   .posts-section {
+
     padding-bottom: 70px;
+
   }
+
+
+  .posts > .post {
+
+    padding: 23px 21px;
+
+  }
+
+
+  .post-top {
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+  }
+
+
+  .post h3 {
+
+    font-size: 21px;
+
+  }
+
 
   .closing-card {
+
     padding: 40px 22px;
+
   }
 
+
   .closing-card h2 {
+
     font-size: 27px;
+
   }
+
 }
