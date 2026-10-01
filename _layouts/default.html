@@ -10,15 +10,15 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+
     <link
       rel="alternate"
       type="application/rss+xml"
       title="{{ site.name }} - {{ site.description }}"
       href="{{ site.baseurl }}/feed.xml"
     />
-
-    <!-- Created with Jekyll Now -->
   </head>
+
 
   <body>
 
@@ -36,17 +36,23 @@
             href="{{ site.baseurl }}/"
             class="site-avatar"
           >
-            <img src="{{ site.avatar }}" alt="{{ site.name }}" />
+            <img
+              src="{{ site.avatar }}"
+              alt="{{ site.name }}"
+            />
           </a>
 
 
           <div class="site-info">
 
             <h1 class="site-name">
+
               <a href="{{ site.baseurl }}/">
                 {{ site.name }}
               </a>
+
             </h1>
+
 
             <p class="site-description">
               {{ site.description }}
@@ -83,7 +89,9 @@
       role="main"
       class="container"
     >
+
       {{ content }}
+
     </div>
 
 
@@ -109,8 +117,9 @@
     {% include analytics.html %}
 
 
+
     <!-- =========================================
-         PIRATE FLAG INTRO
+         REAL FLOWING PIRATE FLAGS
          ========================================= -->
 
     <div
@@ -121,6 +130,10 @@
 
     <style>
 
+      /* -----------------------------------------
+         Pirate rain container
+         ----------------------------------------- */
+
       #pirate-rain {
 
         position: fixed;
@@ -130,59 +143,124 @@
         width: 100%;
         height: 100%;
 
-        pointer-events: none;
-
         overflow: hidden;
+
+        pointer-events: none;
 
         z-index: 99999;
 
       }
 
 
-      .pirate-flag {
+      /* -----------------------------------------
+         Individual flag
+         ----------------------------------------- */
+
+      .pirate-piece {
 
         position: absolute;
 
-        top: -80px;
+        top: -180px;
 
-        display: block;
+        left: 0;
 
-        font-size: 30px;
+        width: 95px;
 
-        line-height: 1;
+        height: 85px;
 
         opacity: 0;
 
-        user-select: none;
-
-        will-change: transform, opacity;
+        will-change:
+          transform,
+          opacity;
 
         animation:
-          pirateFall
+          pirate-drop
           var(--fall-time)
-          linear
+          cubic-bezier(.18,.65,.25,1)
           var(--delay)
           forwards;
 
       }
 
 
-      @keyframes pirateFall {
+      /* -----------------------------------------
+         Pole
+         ----------------------------------------- */
+
+      .pirate-pole {
+
+        stroke: #777;
+
+        stroke-width: 3;
+
+        stroke-linecap: round;
+
+      }
+
+
+      /* -----------------------------------------
+         Flag fabric
+         ----------------------------------------- */
+
+      .pirate-cloth {
+
+        filter:
+          url("#cloth-wave");
+
+      }
+
+
+      /* -----------------------------------------
+         Falling movement
+         ----------------------------------------- */
+
+      @keyframes pirate-drop {
 
         0% {
 
-          transform:
-            translate3d(0, -80px, 0)
-            rotate(0deg);
-
           opacity: 0;
+
+          transform:
+            translate3d(
+              var(--x),
+              -160px,
+              0
+            )
+            rotate(
+              var(--start-rotation)
+            )
+            scale(
+              var(--scale)
+            );
 
         }
 
 
-        10% {
+        8% {
 
           opacity: 1;
+
+        }
+
+
+        25% {
+
+          transform:
+            translate3d(
+              calc(
+                var(--x) +
+                var(--sway-1)
+              ),
+              25vh,
+              0
+            )
+            rotate(
+              var(--rotation-1)
+            )
+            scale(
+              var(--scale)
+            );
 
         }
 
@@ -191,35 +269,82 @@
 
           transform:
             translate3d(
-              var(--sway),
-              50vh,
+              calc(
+                var(--x) +
+                var(--sway-2)
+              ),
+              55vh,
               0
             )
-            rotate(var(--rotation));
+            rotate(
+              var(--rotation-2)
+            )
+            scale(
+              var(--scale)
+            );
 
         }
 
 
-        85% {
+        75% {
 
-          opacity: 0.9;
+          opacity: 1;
+
+          transform:
+            translate3d(
+              calc(
+                var(--x) +
+                var(--sway-3)
+              ),
+              80vh,
+              0
+            )
+            rotate(
+              var(--rotation-3)
+            )
+            scale(
+              var(--scale)
+            );
 
         }
 
 
         100% {
 
+          opacity: 0;
+
           transform:
             translate3d(
-              var(--sway-end),
-              110vh,
+              calc(
+                var(--x) +
+                var(--sway-4)
+              ),
+              115vh,
               0
             )
             rotate(
-              calc(var(--rotation) * 2)
+              var(--end-rotation)
+            )
+            scale(
+              var(--scale)
             );
 
-          opacity: 0;
+        }
+
+      }
+
+
+      /* -----------------------------------------
+         Mobile
+         ----------------------------------------- */
+
+      @media screen and (max-width: 700px) {
+
+        .pirate-piece {
+
+          width: 72px;
+
+          height: 65px;
 
         }
 
@@ -228,16 +353,17 @@
     </style>
 
 
+
     <script>
 
       document.addEventListener(
         "DOMContentLoaded",
         function () {
 
-          /*
-             Only run the pirate intro
-             on the homepage.
-          */
+
+          /* -----------------------------------
+             Only run on homepage
+             ----------------------------------- */
 
           const path =
             window.location.pathname;
@@ -253,31 +379,108 @@
 
 
           if (!isHome) {
+
             return;
+
           }
 
 
-          const container =
+          const rain =
             document.getElementById(
               "pirate-rain"
             );
 
 
-          if (!container) {
+          if (!rain) {
+
             return;
+
           }
 
 
-          /*
-             Number of flags.
-          */
+          /* -----------------------------------
+             Create SVG filter once
+             ----------------------------------- */
 
-          const flagCount = 30;
+          const filterSvg =
+            document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "svg"
+            );
 
 
-          /*
-             Create pirate flags.
-          */
+          filterSvg.setAttribute(
+            "width",
+            "0"
+          );
+
+          filterSvg.setAttribute(
+            "height",
+            "0"
+          );
+
+
+          filterSvg.innerHTML = `
+
+            <defs>
+
+              <filter
+                id="cloth-wave"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="160%"
+              >
+
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.018 0.045"
+                  numOctaves="2"
+                  seed="8"
+                  result="noise"
+                >
+
+                  <animate
+                    attributeName="baseFrequency"
+                    dur="2.2s"
+                    values="
+                      0.018 0.045;
+                      0.026 0.060;
+                      0.018 0.045
+                    "
+                    repeatCount="indefinite"
+                  />
+
+                </feTurbulence>
+
+
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  scale="11"
+                  xChannelSelector="R"
+                  yChannelSelector="G"
+                />
+
+              </filter>
+
+            </defs>
+
+          `;
+
+
+          document.body.appendChild(
+            filterSvg
+          );
+
+
+
+          /* -----------------------------------
+             Flag creation
+             ----------------------------------- */
+
+          const flagCount = 18;
+
 
           for (
             let i = 0;
@@ -285,45 +488,102 @@
             i++
           ) {
 
+
             const flag =
-              document.createElement("span");
+              document.createElement("div");
 
 
             flag.className =
-              "pirate-flag";
+              "pirate-piece";
 
 
-            flag.textContent =
-              "🏴‍☠️";
+            /* --------------------------------
+               Random values
+               -------------------------------- */
+
+            const x =
+              Math.random() *
+              window.innerWidth;
 
 
-            /*
-               Random horizontal position.
-            */
+            const scale =
+              0.65 +
+              Math.random() *
+              0.65;
 
-            flag.style.left =
-              Math.random() * 100 + "vw";
-
-
-            /*
-               Random size.
-            */
-
-            const size =
-              22 +
-              Math.random() * 22;
-
-            flag.style.fontSize =
-              size + "px";
-
-
-            /*
-               Random fall duration.
-            */
 
             const fallTime =
-              2.8 +
-              Math.random() * 2.5;
+              4.5 +
+              Math.random() *
+              2.5;
+
+
+            const delay =
+              Math.random() *
+              2.5;
+
+
+            const sway1 =
+              (Math.random() - 0.5) *
+              180;
+
+
+            const sway2 =
+              (Math.random() - 0.5) *
+              300;
+
+
+            const sway3 =
+              (Math.random() - 0.5) *
+              220;
+
+
+            const sway4 =
+              (Math.random() - 0.5) *
+              350;
+
+
+            const startRotation =
+              (Math.random() - 0.5) *
+              30;
+
+
+            const rotation1 =
+              (Math.random() - 0.5) *
+              45;
+
+
+            const rotation2 =
+              (Math.random() - 0.5) *
+              70;
+
+
+            const rotation3 =
+              (Math.random() - 0.5) *
+              55;
+
+
+            const endRotation =
+              (Math.random() - 0.5) *
+              90;
+
+
+
+            /* --------------------------------
+               CSS variables
+               -------------------------------- */
+
+            flag.style.setProperty(
+              "--x",
+              x + "px"
+            );
+
+
+            flag.style.setProperty(
+              "--scale",
+              scale
+            );
+
 
             flag.style.setProperty(
               "--fall-time",
@@ -331,65 +591,222 @@
             );
 
 
-            /*
-               Random delay.
-            */
-
-            const delay =
-              Math.random() * 1.8;
-
             flag.style.setProperty(
               "--delay",
               delay + "s"
             );
 
 
-            /*
-               Random sideways movement.
-            */
-
-            const sway =
-              (Math.random() - 0.5) *
-              180;
-
-            const swayEnd =
-              (Math.random() - 0.5) *
-              280;
-
-
             flag.style.setProperty(
-              "--sway",
-              sway + "px"
+              "--sway-1",
+              sway1 + "px"
             );
 
 
             flag.style.setProperty(
-              "--sway-end",
-              swayEnd + "px"
+              "--sway-2",
+              sway2 + "px"
             );
 
-
-            /*
-               Random rotation.
-            */
-
-            const rotation =
-              (Math.random() - 0.5) *
-              90;
 
             flag.style.setProperty(
-              "--rotation",
-              rotation + "deg"
+              "--sway-3",
+              sway3 + "px"
             );
 
 
-            container.appendChild(flag);
+            flag.style.setProperty(
+              "--sway-4",
+              sway4 + "px"
+            );
 
 
-            /*
-               Remove each flag after
-               its animation finishes.
-            */
+            flag.style.setProperty(
+              "--start-rotation",
+              startRotation + "deg"
+            );
+
+
+            flag.style.setProperty(
+              "--rotation-1",
+              rotation1 + "deg"
+            );
+
+
+            flag.style.setProperty(
+              "--rotation-2",
+              rotation2 + "deg"
+            );
+
+
+            flag.style.setProperty(
+              "--rotation-3",
+              rotation3 + "deg"
+            );
+
+
+            flag.style.setProperty(
+              "--end-rotation",
+              endRotation + "deg"
+            );
+
+
+
+            /* --------------------------------
+               SVG flag
+               -------------------------------- */
+
+            flag.innerHTML = `
+
+              <svg
+                viewBox="0 0 120 105"
+                width="100%"
+                height="100%"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+
+
+                <!-- Pole -->
+
+                <line
+                  class="pirate-pole"
+                  x1="12"
+                  y1="8"
+                  x2="12"
+                  y2="96"
+                />
+
+
+                <!-- Pole top -->
+
+                <circle
+                  cx="12"
+                  cy="7"
+                  r="4"
+                  fill="#999"
+                />
+
+
+                <!-- Flag -->
+
+                <path
+                  class="pirate-cloth"
+                  d="
+                    M 14 12
+                    C 35 8, 53 18, 72 13
+                    C 88 9, 101 16, 114 12
+                    L 114 58
+                    C 95 63, 80 51, 65 57
+                    C 46 64, 30 51, 14 56
+                    Z
+                  "
+                  fill="#111"
+                  stroke="#777"
+                  stroke-width="1.5"
+                />
+
+
+                <!-- Skull -->
+
+                <g
+                  fill="#e7e7e7"
+                  stroke="#111"
+                  stroke-width="1"
+                >
+
+                  <circle
+                    cx="57"
+                    cy="32"
+                    r="13"
+                  />
+
+
+                  <!-- Jaw -->
+
+                  <path
+                    d="
+                      M 46 36
+                      Q 57 49 68 36
+                      L 66 44
+                      L 48 44
+                      Z
+                    "
+                  />
+
+
+                  <!-- Left eye -->
+
+                  <circle
+                    cx="52"
+                    cy="31"
+                    r="3.5"
+                    fill="#111"
+                  />
+
+
+                  <!-- Right eye -->
+
+                  <circle
+                    cx="62"
+                    cy="31"
+                    r="3.5"
+                    fill="#111"
+                  />
+
+
+                  <!-- Nose -->
+
+                  <path
+                    d="
+                      M 57 34
+                      L 54 39
+                      L 60 39
+                      Z
+                    "
+                    fill="#111"
+                  />
+
+                </g>
+
+
+                <!-- Crossbones -->
+
+                <g
+                  stroke="#e7e7e7"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                >
+
+                  <line
+                    x1="38"
+                    y1="50"
+                    x2="76"
+                    y2="65"
+                  />
+
+                  <line
+                    x1="76"
+                    y1="50"
+                    x2="38"
+                    y2="65"
+                  />
+
+                </g>
+
+
+              </svg>
+
+            `;
+
+
+            rain.appendChild(
+              flag
+            );
+
+
+            /* --------------------------------
+               Remove after animation
+               -------------------------------- */
 
             setTimeout(
               function () {
@@ -400,32 +817,35 @@
               (
                 fallTime +
                 delay +
-                0.5
+                0.7
               ) * 1000
             );
 
           }
 
 
-          /*
-             Remove the whole container
-             after the intro.
-          */
+          /* -----------------------------------
+             Remove whole animation
+             ----------------------------------- */
 
           setTimeout(
             function () {
 
-              const rain =
-                document.getElementById(
-                  "pirate-rain"
-                );
-
               if (rain) {
+
                 rain.remove();
+
+              }
+
+
+              if (filterSvg) {
+
+                filterSvg.remove();
+
               }
 
             },
-            6500
+            9000
           );
 
         }
