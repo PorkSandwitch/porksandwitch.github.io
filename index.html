@@ -61,8 +61,6 @@ layout: default
 
   <div class="interest-grid">
 
-    <!-- Technology -->
-
     <div class="interest-card">
 
       <div class="interest-icon">
@@ -75,13 +73,11 @@ layout: default
 
       <p>
         Computers, software, hardware, tools and interesting
-        technology I discover while exploring the internet.
+        technology I discover.
       </p>
 
     </div>
 
-
-    <!-- Discoveries -->
 
     <div class="interest-card">
 
@@ -95,13 +91,11 @@ layout: default
 
       <p>
         Cool websites, useful resources, interesting projects
-        and random things that are worth sharing.
+        and random things worth sharing.
       </p>
 
     </div>
 
-
-    <!-- Thoughts -->
 
     <div class="interest-card">
 
@@ -149,19 +143,70 @@ layout: default
   </div>
 
 
+  <!-- =========================================
+       CATEGORY FILTER
+       ========================================= -->
+
+  <div class="category-filter">
+
+    <button
+      class="category-button active"
+      data-filter="all"
+    >
+      All
+    </button>
+
+    <button
+      class="category-button"
+      data-filter="tech"
+    >
+      Tech
+    </button>
+
+    <button
+      class="category-button"
+      data-filter="downloads"
+    >
+      Downloads
+    </button>
+
+    <button
+      class="category-button"
+      data-filter="internet"
+    >
+      Internet
+    </button>
+
+    <button
+      class="category-button"
+      data-filter="thoughts"
+    >
+      Thoughts
+    </button>
+
+  </div>
+
+
+  <!-- =========================================
+       POST LIST
+       ========================================= -->
+
   <div class="posts">
 
     {% for post in site.posts %}
 
-      <article class="post">
+      {% assign post_category = post.categories | first | downcase | slugify %}
 
-        <!-- Post information -->
+      <article
+        class="post"
+        data-category="{{ post_category }}"
+      >
 
         <div class="post-top">
 
           <span class="post-category">
 
-            {% if post.categories %}
+            {% if post.categories and post.categories != empty %}
 
               {{ post.categories | first }}
 
@@ -183,8 +228,6 @@ layout: default
         </div>
 
 
-        <!-- Post title -->
-
         <h3>
 
           <a href="{{ site.baseurl }}{{ post.url }}">
@@ -196,16 +239,12 @@ layout: default
         </h3>
 
 
-        <!-- Post preview -->
-
         <div class="entry">
 
           {{ post.excerpt }}
 
         </div>
 
-
-        <!-- Read more -->
 
         <a
           href="{{ site.baseurl }}{{ post.url }}"
@@ -239,23 +278,19 @@ layout: default
 
     <div class="closing-glow"></div>
 
-
     <span class="section-label">
       KEEP EXPLORING
     </span>
-
 
     <h2>
       There's always something<br>
       interesting to discover.
     </h2>
 
-
     <p>
       Thanks for stopping by. Have a look around and
       see what I've been sharing.
     </p>
-
 
     <a
       href="{{ site.baseurl }}/about"
@@ -267,3 +302,66 @@ layout: default
   </div>
 
 </section>
+
+
+<!-- =========================================
+     CATEGORY FILTER SCRIPT
+     ========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const buttons =
+    document.querySelectorAll(".category-button");
+
+  const posts =
+    document.querySelectorAll(".posts .post");
+
+
+  buttons.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      const filter =
+        button.getAttribute("data-filter");
+
+
+      /* Active button */
+
+      buttons.forEach(function (item) {
+
+        item.classList.remove("active");
+
+      });
+
+      button.classList.add("active");
+
+
+      /* Filter posts */
+
+      posts.forEach(function (post) {
+
+        const category =
+          post.getAttribute("data-category");
+
+
+        if (filter === "all" || category === filter) {
+
+          post.style.display = "";
+
+        } else {
+
+          post.style.display = "none";
+
+        }
+
+      });
+
+    });
+
+  });
+
+});
+
+</script>
