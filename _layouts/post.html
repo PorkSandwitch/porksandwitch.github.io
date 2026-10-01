@@ -12,19 +12,11 @@ layout: default
 
     <div class="post-meta">
 
-      <span class="post-category">
-
-        {% if page.categories %}
-
-          {{ page.categories | first }}
-
-        {% else %}
-
-          discovery
-
-        {% endif %}
-
-      </span>
+{% if page.categories %}
+  <span class="post-category">
+    {{ page.categories | first }}
+  </span>
+{% endif %}
 
 
       <span class="post-date">
