@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Google Play Protect — Extra Step for New Samsung Firmware"
+title: "📱 Samsung Play Protect Block? Here's an Extra Step "
 date: 2026-10-04
 categories: Tech
 tags: [Samsung, Android, Play Protect]
@@ -17,7 +17,8 @@ This post is for <strong>educational and research purposes only</strong>. I do n
 
 ## What is this?
 
-If you're following the Samsung Knox guide, you may run into **Google Play Protect blocking applications** required later in the process.
+If you're following the Samsung Knox guide [Yash Garg](https://yashgarg.dev/posts/bypass-knox-samsung/)
+, you may run into **Google Play Protect blocking applications** required later in the process.
 
 This post covers the additional steps needed to get past that issue on some Samsung firmware versions.
 
