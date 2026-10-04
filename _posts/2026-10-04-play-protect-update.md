@@ -144,4 +144,4 @@ This post is only the additional Play Protect portion; the remaining steps are c
 
 ---
 
-*Last updated: October 2026*
+*Last updated: July 2026*
