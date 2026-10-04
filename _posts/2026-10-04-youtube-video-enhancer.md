@@ -1,7 +1,7 @@
 ---
 layout: post
 title: YouTube Video Enhancer
-categories: [Technology]
+categories: [Tech]
 ---
 
 # 🎥 YouTube Video Enhancer
