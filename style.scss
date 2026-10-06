@@ -11,17 +11,14 @@
 
 :root {
   color-scheme: dark;
-
   --bg: #000000;
   --surface: #0a0a0a;
   --line: #1f1f1f;
   --line-hi: #3a3a3a;
-
   --text: #ededed;
   --white: #ffffff;
   --muted: #8a8a8a;
   --dim: #7a7a7a;
-
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   --mono: "JetBrains Mono", "SFMono-Regular", Consolas,
@@ -81,7 +78,7 @@ h1, h2, h3, h4 {
 }
 
 /* =========================================
-   LINKS - FIX 1: Grey -> Blue
+   LINKS - FIX: Grey -> Blue
    ========================================= */
 
 a {
@@ -98,7 +95,7 @@ a:hover {
 }
 
 /* =========================================
-   HEADER - FIX 2: Remove white line
+   HEADER - FIX: Remove white line
    ========================================= */
 
 .wrapper-masthead {
@@ -111,7 +108,7 @@ a:hover {
   background: transparent;
 }
 
-/* Avatar - FIX 3: Colored PFP */
+/* Avatar - FIX: Colored PFP */
 
 .site-avatar {
   float: left;
@@ -307,7 +304,6 @@ nav a:hover {
 
 /* =========================================
    INTERESTS
-   Cards share hairline borders (no gaps).
    ========================================= */
 
 .interests {
@@ -357,7 +353,7 @@ nav a:hover {
 }
 
 /* =========================================
-   POSTS (list rows, not floating cards)
+   POSTS
    ========================================= */
 
 .posts-section {
@@ -505,7 +501,6 @@ nav a:hover {
   border-radius: 12px;
 }
 
-/* Glow removed in the black theme */
 .closing-glow {
   display: none;
 }
@@ -549,53 +544,41 @@ footer {
   .container {
     padding: 0 20px;
   }
-
   .masthead {
     padding: 16px 0;
   }
-
   .hero {
     padding: 70px 0 80px;
   }
-
   .hero h1 {
     letter-spacing: -0.04em;
   }
-
   .hero-text {
     font-size: 16px;
   }
-
   .hero-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-
   .button {
     text-align: center;
   }
-
   .interest-grid {
     grid-template-columns: 1fr;
   }
-
   .interests,
   .posts-section {
     padding-bottom: 80px;
   }
-
   .posts > .post {
     padding: 26px 0 28px;
   }
-
   .post h3 {
     font-size: 22px;
   }
-
   .closing-section {
     padding-bottom: 80px;
   }
-
   .closing-card {
     padding: 44px 24px;
   }
@@ -813,8 +796,6 @@ footer {
   color: var(--bg);
 }
 
-/* Post footer */
-
 .post-footer {
   margin: 72px 0 0;
 }
@@ -864,35 +845,28 @@ footer {
   .modern-post {
     padding-bottom: 80px;
   }
-
   .post-header {
     padding: 48px 0 36px;
   }
-
   .post-description {
     font-size: 16px;
   }
-
   .post-content {
     font-size: 16px;
     line-height: 1.8;
   }
-
   .post-content h2 {
     margin-top: 42px;
     font-size: 25px;
   }
-
   .post-content h3 {
     font-size: 20px;
   }
-
   .post-content pre {
     margin-left: -6px;
     margin-right: -6px;
     border-radius: 8px;
   }
-
   .post-footer-content {
     flex-direction: column;
     align-items: flex-start;
@@ -969,10 +943,6 @@ footer {
     padding: 56px 0 80px;
   }
 }
-
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
   *,
