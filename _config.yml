@@ -9,50 +9,32 @@ name: PorkSandwitch
 description: Cool stuff I find on the internet
 
 # Your avatar / profile picture
-# This uses your GitHub profile picture.
 avatar: https://github.com/PorkSandwitch.png?size=256
-
 
 #
 # Footer links
 #
 
 footer-links:
-
   dribbble:
-
   email:
-
   facebook:
-
   flickr:
-
   github: PorkSandwitch
-
   instagram:
-
   linkedin:
-
   pinterest:
-
   rss: true
-
   twitter:
-
   stackoverflow:
-
   youtube:
-
   googleplus:
-
 
 #
 # Comments
 #
 
-# Add your Disqus shortname here later if you want comments.
 disqus:
-
 
 #
 # Analytics
@@ -60,15 +42,12 @@ disqus:
 
 google_analytics:
 
-
 #
 # Website URL
 #
 
 url: https://porksandwitch.github.io
-
 baseurl: ""
-
 
 #
 # Permalinks
@@ -76,27 +55,22 @@ baseurl: ""
 
 permalink: /:title/
 
-
 #
 # Jekyll / Markdown
 #
 
 kramdown:
   input: GFM
-
 syntax_highlighter: rouge
-
 syntax_highlighter_opts:
   css_class: 'highlight'
 
-
 #
-# Sass
+# Sass - COMPRESSED FOR SPEED
 #
 
 sass:
-  style: :expanded
-
+  style: :compressed
 
 #
 # Plugins
@@ -106,9 +80,8 @@ gems:
   - jekyll-sitemap
   - jekyll-feed
 
-
 #
-# Files excluded from the generated website
+# Files excluded
 #
 
 exclude:
